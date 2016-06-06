@@ -43,6 +43,6 @@ int main(int argc, char * argv[]) {
 	/*if (minlen > words->maxlen) {
 		printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
 		exit(1);
-	}*/
+	} */
 	return play(minlen);
 }
