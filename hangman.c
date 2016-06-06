@@ -14,7 +14,7 @@ struct wordlist {
 } * words;
 
 void load(char * path) {
-	char temp[30];
+	char temp[300];
 	size_t index = 0;
 
 	words = malloc(sizeof(struct wordlist));
@@ -97,7 +97,7 @@ int play(int minlen) {
 
 int main(int argc, char * argv[]) {
 
-	char * path = "/usr/share/wordlist";
+	char * path = "wordlist";
 	long minlen = 3;
 
 	if (argc > 1) {
@@ -132,7 +132,7 @@ int main(int argc, char * argv[]) {
 	}
 	load(path);
 	if (minlen > words->maxlen) {
-		printf("\nsize must not be larger than the longest word, %u\n", words->maxlen);
+		printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
 		exit(1);
 	}
 	return play(minlen);
