@@ -58,7 +58,7 @@ int play(int minlen) {
         memset(found, '\0', word->length+1);
         memset(found, '_', word->length);
             printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
-           do {
+            do {
                 guess = getchar();
                 if (guess == '\n') {
                     printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
@@ -90,9 +90,12 @@ int play(int minlen) {
             } else {
                 printf("PERDESTE!\n\n");
             }
-            printf("deseja jogar? 1- sim 0 - não\n");
+	    printf("deseja jogar? 1- sim 0 - não\n");
             scanf("%d", &resp);
-        } while( resp);
+            while (getchar() != '\n') {
+                /* do nothing */
+            };
+        } while(resp);
 	
         return 0;
 }
