@@ -4,16 +4,15 @@
 #include "h.h"
 
 int main(int argc, char * argv[]) {
-
+	char resp;
 	struct wordlist * words;
-	char * path = "wordlist";
+	char * path = "dicionario";
 	long minlen = 3;
-
 	if (argc > 1) {
 		if (strcmp(argv[1], "-h") == 0) {
-			printf("\nhangman command line arguments:\n\
-					\n-w path\n\tPath to a whitespace seperated list of words.\
-					\n-s size\n\tMinimum word size.\n");
+			printf("\nhangman comando linha de argumentos:\n\
+					\n-w caminho\n\tCaminho para um espaço em branco lista de palavras separadas .\
+					\n-s tamanho\n\ttamanho minimo para a pavra.\n");
 			return 0;
 		}
 		else {
@@ -22,7 +21,7 @@ int main(int argc, char * argv[]) {
 				if (strcmp(argv[i], "-w") == 0) {
 					if (i+1 < argc) { i++; }
 					else {
-						printf("\n-w requires a wordlist path\n");
+						printf("\n-w requer uma localidade para o dicionario\n");
 						return 1;
 					}
 					path = argv[i];
@@ -30,7 +29,7 @@ int main(int argc, char * argv[]) {
 				if (strcmp(argv[i], "-s") == 0) {
 					if (i+1 < argc) { i++; }
 					else {
-						printf("\n-s requires a minimum size\n");
+						printf("\n-s requer um tamanho minimo\n");
 						return 1;
 					}
 					minlen = strtol(argv[i], NULL, 0);
@@ -40,9 +39,11 @@ int main(int argc, char * argv[]) {
 		}
 	}
 	load(path);
+	
 	/*if (minlen > words->maxlen) {
 		printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
 		exit(1);
 	} */
 	return play(minlen);
-}
+	}
+
