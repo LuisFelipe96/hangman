@@ -8,6 +8,7 @@ int main(int argc, char * argv[]) {
     struct wordlist * words;
     char * path = "dicionario";
     long minlen = 3;
+    int qp=0;
     if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             printf("\nhangman comando linha de argumentos:\n\
@@ -39,6 +40,16 @@ int main(int argc, char * argv[]) {
                     }
                     minlen = strtol(argv[i], NULL, 0);
                 }
+		if (strcmp(argv[i], "-p") == 0) {
+			if (i+1 < argc) {
+                        i++;
+                    }
+                    else {
+                        printf("\n-s requer numero de jogadores\n");
+                        return 1;
+                    }
+		    qp= strtol(argv[i], NULL, 0);		
+		}
                 i++;
             }	while (i < argc);
         }
@@ -49,6 +60,6 @@ int main(int argc, char * argv[]) {
     	printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
     	exit(1);
     } */
-    return play(minlen);
+    return play(minlen,qp);
 }
 
