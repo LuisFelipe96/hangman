@@ -41,58 +41,107 @@ void load(char * path) {
     }
     words->count = index;
 }
+int forca(int *chances)
+{
+	switch(*chances)
+		{
+			case 0:
+				printf("\n0\n");
+				break;
+			case 1:
+				printf("\n|---------------|\n|              /o\\\n|\n|\n|\n|\n|\n|\n");
+				break;
+			case 2:
+				printf("\n|---------------|\n|              /o\n|\n|\n|\n|\n|\n|\n");
+				break;
+			case 3:
+				printf("\n|---------------|\n\n|               O\n|            o\n|\n|\n|\n|\n|\n|\n");
+				break;					
+ 			case 4:
+				printf("\n|---------------|\n|               O\n|\n|\n|\n|\n|\n|\n");
+				break;
+			case 5:
+				printf("\n|---------------|\n|\n|\n|\n|\n|\n|\n|\n");
+				break;
+		}
+}
+
 
 int play(int minlen) {
     printf("\n");
     int resp;
+    struct word *palavra;
+    char temp[300];
     srand(time(NULL));
     do {
         struct word * word;
-        do {
-            word = words->list[rand()%words->count];
-        } while (word->length < minlen);
+        printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
+        scanf("%d", &resp);
+        if(resp) {
+            do {
+                word = words->list[rand()%words->count];
+            } while (word->length < minlen);
+        } else {
+
+            scanf("%s",temp);
+            size_t length = strlen(temp);
+            palavra = malloc(sizeof(struct word));
+            palavra->text = (char *)malloc(length*sizeof(char)+1);
+            strcpy(palavra->text, temp);
+            palavra->length = length;
+            word = palavra;
+        }
         int guess;
         int chances = 5;
         char wrong[30] = "";
         char found[word->length+1];
         memset(found, '\0', word->length+1);
-        memset(found, '_', word->length);
-            printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
-           do {
-                guess = getchar();
-                if (guess == '\n') {
-                    printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
-                    continue;
-                }
-                else if (guess == EOF) {
-                    printf("\n");
-                    return 0;
-                }
-                else if (guess < 97 || guess > 122) {
-                    continue;
-                }
-                else {
-                    int i;
-                    for (i = 0; i < strlen(found); i++) {
-                        if (word->text[i] == guess) {
-                            found[i] = guess;
-                        }
-                    }
-                    if (strchr(found, guess) == NULL && strchr(wrong, guess) == NULL) {
-                        strncat(wrong, (char *)&guess, 30);
-                        chances--;
-                    } 
-                }
-            } while (strchr(found, '_') != NULL && chances > 0);
-            printf("acertos %s | chances %i | erros '%s'\n", word->text, chances, wrong);
-            if (chances > 0) {
-                printf("VITÓRIA!\n\n");
-            } else {
-                printf("PERDESTE!\n\n");
+        memset(found, '.', word->length);
+		forca(&chances);
+	while (getchar() != '\n') {
+            /* do nothing */
+        };
+        printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
+        do {
+            guess = getchar();
+            if (guess == '\n') {
+                printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
+                continue;
             }
-            printf("deseja jogar? 1- sim 0 - não\n");
-            scanf("%d", &resp);
-        } while( resp);
-	
-        return 0;
+            else if (guess == EOF) {
+                printf("\n");
+                return 0;
+            }
+            else if (guess < 97 || guess > 122) {
+                continue;
+            }
+            else {
+                int i;
+                for (i = 0; i < strlen(found); i++) {
+                    if (word->text[i] == guess) {
+                        found[i] = guess;
+                    }
+                }
+            }
+            if (strchr(found, guess) == NULL && strchr(wrong, guess) == NULL) {
+                strncat(wrong, (char *)&guess, 30);
+                chances--;
+            }
+		forca(&chances);
+        } while (strchr(found, '.') != NULL && chances > 0);
+        printf("acertos %s | chances %i | erros '%s'\n", word->text, chances, wrong);
+        if (chances > 0) {
+            printf("VITÓRIA!\n\n");
+        } else {
+            printf("PERDESTE!\n\n");
+        }
+        printf("deseja jogar? 1- sim 0 - não\n");
+        scanf("%d", &resp);
+        while (getchar() != '\n') {
+            /* do nothing */
+        };
+    }
+    while(resp);
+
+    return 0;
 }
