@@ -12,12 +12,8 @@ int main(int argc, char * argv[]) {
         if (strcmp(argv[1], "-h") == 0) {
             printf("\nhangman comando linha de argumentos:\n\
 					\n-w caminho\n\tCaminho para um espaço em branco lista de palavras separadas .\
-<<<<<<< HEAD
 					\n-s tamanho\n\ttamanho minimo para a pavra.\n\
 					\n-p jogadores\n\tnumero de jogadores 1,2,3");
-=======
-					\n-s tamanho\n\ttamanho minimo para a pavra.\n");
->>>>>>> 2292efaf51c5fc57c46cac39b68ad5e9329c6ef6
             return 0;
         }
         else {

@@ -72,7 +72,9 @@ int play(int minlen) {
         char found[word->length+1];
         memset(found, '\0', word->length+1);
         memset(found, '_', word->length);
-<<<<<<< HEAD
+	while (getchar() != '\n') {
+            /* do nothing */
+        };
         printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
         do {
             guess = getchar();
@@ -91,37 +93,14 @@ int play(int minlen) {
                 int i;
                 for (i = 0; i < strlen(found); i++) {
                     if (word->text[i] == guess) {
-                        found[i] = guess;//contar pontos aqui
-=======
-            printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
-            do {
-                guess = getchar();
-                if (guess == '\n') {
-                    printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
-                    continue;
-                }
-                else if (guess == EOF) {
-                    printf("\n");
-                    return 0;
-                }
-                else if (guess < 97 || guess > 122) {
-                    continue;
-                }
-                else {
-                    int i;
-                    for (i = 0; i < strlen(found); i++) {
-                        if (word->text[i] == guess) {
-                            found[i] = guess;
-                        }
->>>>>>> 2292efaf51c5fc57c46cac39b68ad5e9329c6ef6
+                        found[i] = guess;
                     }
                 }
-                if (strchr(found, guess) == NULL && strchr(wrong, guess) == NULL) {
-                    strncat(wrong, (char *)&guess, 30);
-                    chances--;
-                }
             }
-<<<<<<< HEAD
+            if (strchr(found, guess) == NULL && strchr(wrong, guess) == NULL) {
+                strncat(wrong, (char *)&guess, 30);
+                chances--;
+            }
         } while (strchr(found, '_') != NULL && chances > 0);
         printf("acertos %s | chances %i | erros '%s'\n", word->text, chances, wrong);
         if (chances > 0) {
@@ -131,17 +110,11 @@ int play(int minlen) {
         }
         printf("deseja jogar? 1- sim 0 - não\n");
         scanf("%d", &resp);
-    } while(resp);
+        while (getchar() != '\n') {
+            /* do nothing */
+        };
+    }
+    while(resp);
 
     return 0;
-=======
-	    printf("deseja jogar? 1- sim 0 - não\n");
-            scanf("%d", &resp);
-            while (getchar() != '\n') {
-                /* do nothing */
-            };
-        } while(resp);
-	
-        return 0;
->>>>>>> 2292efaf51c5fc57c46cac39b68ad5e9329c6ef6
 }
