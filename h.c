@@ -45,12 +45,27 @@ void load(char * path) {
 int play(int minlen) {
     printf("\n");
     int resp;
+    struct word *palavra;
+    char temp[300];
     srand(time(NULL));
     do {
         struct word * word;
-        do {
-            word = words->list[rand()%words->count];
-        } while (word->length < minlen);
+        printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
+        scanf("%d", &resp);
+        if(resp) {
+            do {
+                word = words->list[rand()%words->count];
+            } while (word->length < minlen);
+        } else {
+
+            scanf("%s",temp);
+            size_t length = strlen(temp);
+            palavra = malloc(sizeof(struct word));
+            palavra->text = (char *)malloc(length*sizeof(char)+1);
+            strcpy(palavra->text, temp);
+            palavra->length = length;
+            word = palavra;
+        }
         int guess;
         int chances = 5;
         char wrong[30] = "";
