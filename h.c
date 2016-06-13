@@ -15,6 +15,12 @@ struct wordlist {
     size_t maxlen;
 } * words;
 
+struct player {
+    char forca[10][10];
+    int pontos[26];
+    int qtdeP;
+} jogador;
+
 void load(char * path) {
     char temp[300];
     size_t index = 0;
