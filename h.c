@@ -15,6 +15,8 @@ struct wordlist {
     size_t maxlen;
 } * words;
 
+
+
 void load(char * path) {
     char temp[300];
     size_t index = 0;
@@ -67,12 +69,28 @@ int forca(int *chances)
 }
 
 
-int play(int minlen) {
+void inicializaPlayer(struct player *jogadores,int qp){
+	int i;
+	int j;
+	for(i=0;i<qp;i++){
+		jogadores->pontos[i]=0;
+	}
+	for(i=0;i<10;i++){
+		for(j=0;j<10;j++){
+			jogadores->forca[i][j]='.';
+		}
+	}
+}
+
+int play(int minlen,int qp) {
     printf("\n");
     int resp;
     struct word *palavra;
     char temp[300];
     srand(time(NULL));
+    struct player jogadores;
+    inicializaPlayer(&jogadores,qp);
+    printf("%i e %s", jogadores.pontos[0],jogadores.forca[0]);
     do {
         struct word * word;
         printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
