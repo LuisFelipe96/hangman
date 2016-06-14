@@ -125,7 +125,7 @@ int play(int minlen,int qp) {
 	while (getchar() != '\n') {
             /* do nothing */
         };
-	if (qp>0){
+	if (qp>1){
 		printf("vez do jogador: %i\n",cj+1);
 	}
         printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
