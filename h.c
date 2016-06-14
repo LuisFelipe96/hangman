@@ -87,7 +87,7 @@ void inicializaPlayer(struct player *jogadores,int qp){
 
 int play(int minlen,int qp) {
     printf("\n");
-    int resp;
+    int resp,i;
     struct word *palavra;
     char temp[300];
     srand(time(NULL));
@@ -95,7 +95,7 @@ int play(int minlen,int qp) {
     inicializaPlayer(&jogadores,qp);
     int cj=0;
     int mod=0;
-    //printf("%i e %s", jogadores.pontos[0],jogadores.forca[0]);
+    
     do {
         struct word * word;
         printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
@@ -150,6 +150,7 @@ int play(int minlen,int qp) {
                 for (i = 0; i < strlen(found); i++) {
                     if (word->text[i] == guess) {
                         found[i] = guess;
+			
                     }
                 }
             }
@@ -160,14 +161,19 @@ int play(int minlen,int qp) {
 			cj++;
 		}
             }
+	    else{
+		jogadores.pontos[i]++;
+                 }
 		forca(&chances);
+	
         } while (strchr(found, '.') != NULL && chances > 0);
         printf("acertos %s | chances %i | erros '%s'\n", word->text, chances, wrong);
         if (chances > 0) {
-            printf("VITÓRIA!\n\n");
+            printf("VITÓRIA!%i\n\n",jogadores.qp);
         } else {
             printf("PERDESTE!\n\n");
         }
+	printf("%ipontos dos jogadores \n", jogadores.pontos[i]);
         printf("deseja jogar? 1- sim 0 - não\n");
         scanf("%d", &resp);
         while (getchar() != '\n') {
