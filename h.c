@@ -95,7 +95,8 @@ int play(int minlen,int qp) {
     inicializaPlayer(&jogadores,qp);
     int cj=0;
     int mod=0;
-    
+    int maior=0;
+    int p=1;
     do {
         struct word * word;
         printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
@@ -131,9 +132,10 @@ int play(int minlen,int qp) {
         do {
             guess = getchar();
             if (guess == '\n') {
-		if (qp>0){
+		if (qp>1){
 			mod=cj%qp;
 			printf("vez do jogador: %i\n",mod+1);
+			printf("pontos %i\n", jogadores.pontos[mod]);
 		}
                 printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
                 continue;
@@ -150,7 +152,7 @@ int play(int minlen,int qp) {
                 for (i = 0; i < strlen(found); i++) {
                     if (word->text[i] == guess) {
                         found[i] = guess;
-			
+			jogadores.pontos[mod]++;
                     }
                 }
             }
@@ -161,19 +163,25 @@ int play(int minlen,int qp) {
 			cj++;
 		}
             }
-	    else{
-		jogadores.pontos[i]++;
-                 }
 		forca(&chances);
 	
         } while (strchr(found, '.') != NULL && chances > 0);
         printf("acertos %s | chances %i | erros '%s'\n", word->text, chances, wrong);
         if (chances > 0) {
-            printf("VITÓRIA!%i\n\n",jogadores.qp);
+            printf("VITÓRIA!\n\n");
         } else {
             printf("PERDESTE!\n\n");
         }
-	printf("%ipontos dos jogadores \n", jogadores.pontos[i]);
+	maior=jogador.pontos[0];
+	p=1;
+	for(i=0;i<qp;i++){
+	    	if(jogador.pontos[i]>maior){
+			printf("%i",i);
+			maior=jogador.pontos[i];
+			p=i+1;
+		}
+    	}
+	printf("Ganhador: %i Pontos: %i \n", p,maior);
         printf("deseja jogar? 1- sim 0 - não\n");
         scanf("%d", &resp);
         while (getchar() != '\n') {
