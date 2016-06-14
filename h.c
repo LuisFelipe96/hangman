@@ -48,21 +48,24 @@ int forca(int *chances)
 	switch(*chances)
 		{
 			case 0:
-				printf("\n0\n");
+				printf("\n|---------------|\n|\n|               O\n|              /o\\\n|              / \\\n|\n|\n|\n");
 				break;
 			case 1:
-				printf("\n|---------------|\n|              /o\\\n|\n|\n|\n|\n|\n|\n");
+				printf("\n|---------------|\n|\n|               O\n|              /o\\\n|              / \n|\n|\n|\n");
 				break;
 			case 2:
-				printf("\n|---------------|\n|              /o\n|\n|\n|\n|\n|\n|\n");
+				printf("\n|---------------|\n|\n|               O\n|              /o\\\n|\n|\n|\n|\n");
 				break;
 			case 3:
-				printf("\n|---------------|\n\n|               O\n|            o\n|\n|\n|\n|\n|\n|\n");
+				printf("\n|---------------|\n|               O\n|              /o\n|\n|\n|\n|\n|\n");
+				break;
+			case 4:
+				printf("\n|---------------|\n\n|               O\n|               o\n|\n|\n|\n|\n|\n|\n");
 				break;					
- 			case 4:
+ 			case 5:
 				printf("\n|---------------|\n|               O\n|\n|\n|\n|\n|\n|\n");
 				break;
-			case 5:
+			case 6:
 				printf("\n|---------------|\n|\n|\n|\n|\n|\n|\n|\n");
 				break;
 		}
