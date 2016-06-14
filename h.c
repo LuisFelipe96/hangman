@@ -134,9 +134,9 @@ int play(int minlen,int qp) {
             if (guess == '\n') {
 		if (qp>1){
 			mod=cj%qp;
-			printf("vez do jogador: %i\n",mod+1);
-			printf("pontos %i\n", jogadores.pontos[mod]);
+			printf("vez do jogador: %i\n",mod+1);	
 		}
+		printf("pontos %i\n", jogadores.pontos[mod]);
                 printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
                 continue;
             }
