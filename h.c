@@ -90,7 +90,9 @@ int play(int minlen,int qp) {
     srand(time(NULL));
     struct player jogadores;
     inicializaPlayer(&jogadores,qp);
-    printf("%i e %s", jogadores.pontos[0],jogadores.forca[0]);
+    int cj=0;
+    int mod=0;
+    //printf("%i e %s", jogadores.pontos[0],jogadores.forca[0]);
     do {
         struct word * word;
         printf("deseja usar uma palavra do dicionario ou digitar uma? 1- dicionario 0 - digitar\n");
@@ -110,7 +112,7 @@ int play(int minlen,int qp) {
             word = palavra;
         }
         int guess;
-        int chances = 5;
+        int chances = 6;
         char wrong[30] = "";
         char found[word->length+1];
         memset(found, '\0', word->length+1);
@@ -119,10 +121,17 @@ int play(int minlen,int qp) {
 	while (getchar() != '\n') {
             /* do nothing */
         };
+	if (qp>0){
+		printf("vez do jogador: %i\n",cj+1);
+	}
         printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
         do {
             guess = getchar();
             if (guess == '\n') {
+		if (qp>0){
+			mod=cj%qp;
+			printf("vez do jogador: %i\n",mod+1);
+		}
                 printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
                 continue;
             }
@@ -144,6 +153,9 @@ int play(int minlen,int qp) {
             if (strchr(found, guess) == NULL && strchr(wrong, guess) == NULL) {
                 strncat(wrong, (char *)&guess, 30);
                 chances--;
+		if (qp>0){
+			cj++;
+		}
             }
 		forca(&chances);
         } while (strchr(found, '.') != NULL && chances > 0);
