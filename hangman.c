@@ -45,7 +45,7 @@ int main(int argc, char * argv[]) {
                         i++;
                     }
                     else {
-                        printf("\n-s requer numero de jogadores\n");
+                        printf("\n-p requer numero de jogadores\n");
                         return 1;
                     }
 		    qp= strtol(argv[i], NULL, 0);		
@@ -55,7 +55,10 @@ int main(int argc, char * argv[]) {
         }
     }
     load(path);
-
+    if (qp== 0) {
+    	printf("digite o numero de jogadores que voce quer: ");
+	scanf("%i",&qp);
+    }	
     /*if (minlen > words->maxlen) {
     	printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
     	exit(1);
