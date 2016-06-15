@@ -48,7 +48,11 @@ int main(int argc, char * argv[]) {
                         printf("\n-p requer numero de jogadores\n");
                         return 1;
                     }
-		    qp= strtol(argv[i], NULL, 0);		
+		    qp= strtol(argv[i], NULL, 0);	
+		    if(qp>3){
+		    	printf("\nmaximo de jogadores exedido\n");
+			return 1;
+                    }	
 		}
                 i++;
             }	while (i < argc);
@@ -56,7 +60,7 @@ int main(int argc, char * argv[]) {
     }
     load(path);
     if (qp== 0) {
-    	printf("digite o numero de jogadores que voce quer: ");
+    	printf("digite o numero de jogadores que voce quer(Máximo 3): ");
 	scanf("%i",&qp);
     }	
     /*if (minlen > words->maxlen) {
