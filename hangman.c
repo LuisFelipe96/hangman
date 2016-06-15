@@ -63,7 +63,11 @@ int main(int argc, char * argv[]) {
     if (qp== 0) {
     	printf("digite o numero de jogadores que voce quer(Máximo 3): ");
 	scanf("%i",&qp);
-    }	
+	if(qp>3){
+	    	printf("\nmaximo de jogadores exedido\n");
+		return 1;
+        }
+    }
     if (minlen > maxlen) {
     	printf("\ntamanho maior que a maior palavra, %li\n", maxlen);
     	exit(1);
