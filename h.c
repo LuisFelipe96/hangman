@@ -68,20 +68,14 @@ int forca(int *chances)
 			case 6:
 				printf("\n|---------------|\n|\n|\n|\n|\n|\n|\n|\n");
 				break;
-		}
+	}
 }
 
 
-void inicializaPlayer(struct player *jogadores,int qp){
+void inicializaPlayer(int pontos[],int qp){
 	int i;
-	int j;
 	for(i=0;i<qp;i++){
-		jogadores->pontos[i]=0;
-	}
-	for(i=0;i<10;i++){
-		for(j=0;j<10;j++){
-			jogadores->forca[i][j]='.';
-		}
+		pontos[i]=0;
 	}
 }
 
@@ -91,8 +85,8 @@ int play(int minlen,int qp) {
     struct word *palavra;
     char temp[300];
     srand(time(NULL));
-    struct player jogadores;
-    inicializaPlayer(&jogadores,qp);
+    int pontos[4];
+    inicializaPlayer(pontos,qp);
     int cj=0;
     int mod=0;
     int maior=0;
@@ -138,7 +132,7 @@ int play(int minlen,int qp) {
 			mod=cj%qp;
 			printf("vez do jogador: %i\n",mod+1);	
 		}
-		printf("pontos %i\n", jogadores.pontos[mod]);
+		printf("pontos %i\n", pontos[mod]);
                 printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
                 continue;
             }
@@ -154,7 +148,7 @@ int play(int minlen,int qp) {
                 for (i = 0; i < strlen(found); i++) {
                     if (word->text[i] == guess) {
                         found[i] = guess;
-			jogadores.pontos[mod]++;
+			pontos[mod]++;
                     }
                 }
             }
@@ -174,11 +168,11 @@ int play(int minlen,int qp) {
         } else {
             printf("PERDESTE!\n\n");
         }
-	maior=jogador.pontos[0];
+	maior=pontos[0];
 	p=1;
 	for(i=0;i<qp;i++){
-	    	if(jogadores.pontos[i] > maior){	
-			maior=jogadores.pontos[i];
+	    	if(pontos[i] > maior){	
+			maior=pontos[i];
 			p=i+1;
 		}
     	}
@@ -188,7 +182,7 @@ int play(int minlen,int qp) {
         while (getchar() != '\n') {
             /* do nothing */
         };
-	inicializaPlayer(&jogadores,qp);
+	inicializaPlayer(pontos,qp);
     }
     while(resp);
 
