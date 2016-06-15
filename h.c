@@ -114,6 +114,7 @@ int play(int minlen,int qp) {
             strcpy(palavra->text, temp);
             palavra->length = length;
             word = palavra;
+	    printf("\33[H\33[2J"); 
         }
         int guess;
         int chances = 6;
@@ -126,7 +127,8 @@ int play(int minlen,int qp) {
             /* do nothing */
         };
 	if (qp>1){
-		printf("vez do jogador: %i\n",cj+1);
+		mod=cj%qp;
+		printf("vez do jogador: %i\n",mod+1);
 	}
         printf("acertos %s | chances %i | erros '%s'  ", found, chances, wrong);
         do {
@@ -175,9 +177,8 @@ int play(int minlen,int qp) {
 	maior=jogador.pontos[0];
 	p=1;
 	for(i=0;i<qp;i++){
-	    	if(jogador.pontos[i]>maior){
-			printf("%i",i);
-			maior=jogador.pontos[i];
+	    	if(jogadores.pontos[i] > maior){	
+			maior=jogadores.pontos[i];
 			p=i+1;
 		}
     	}
@@ -187,6 +188,7 @@ int play(int minlen,int qp) {
         while (getchar() != '\n') {
             /* do nothing */
         };
+	inicializaPlayer(&jogadores,qp);
     }
     while(resp);
 
