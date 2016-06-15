@@ -17,7 +17,7 @@ struct wordlist {
 
 
 
-void load(char * path) {
+long load(char * path) {
     char temp[300];
     size_t index = 0;
 
@@ -42,6 +42,7 @@ void load(char * path) {
         index++;
     }
     words->count = index;
+    return words->maxlen;
 }
 int forca(int *chances)
 {

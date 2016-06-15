@@ -8,12 +8,13 @@ int main(int argc, char * argv[]) {
     struct wordlist * words;
     char * path = "dicionario";
     long minlen = 3;
+    long maxlen = 3;
     int qp=0;
     if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             printf("\nhangman comando linha de argumentos:\n\
-					\n-w caminho\n\tCaminho para um espaço em branco lista de palavras separadas .\
-					\n-s tamanho\n\ttamanho minimo para a pavra.\n\
+					\n-w caminho\n\tCaminho para uma lista de palavras separadas por espaço em branco .\
+					\n-s tamanho\n\ttamanho minimo para a palavra.\n\
 					\n-p jogadores\n\tnumero de jogadores 1,2,3");
             return 0;
         }
@@ -58,15 +59,15 @@ int main(int argc, char * argv[]) {
             }	while (i < argc);
         }
     }
-    load(path);
+    maxlen=load(path);
     if (qp== 0) {
     	printf("digite o numero de jogadores que voce quer(Máximo 3): ");
 	scanf("%i",&qp);
     }	
-    /*if (minlen > words->maxlen) {
-    	printf("\nsize must not be larger than the longest word, %zu\n", words->maxlen);
+    if (minlen > maxlen) {
+    	printf("\ntamanho maior que a maior palavra, %li\n", maxlen);
     	exit(1);
-    } */
+    } 
     return play(minlen,qp);
 }
 

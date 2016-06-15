@@ -1,5 +1,5 @@
 
-extern void load(char *);
+extern long load(char *);
 
 extern int play(int,int);
 
